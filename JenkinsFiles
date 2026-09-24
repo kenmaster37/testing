@@ -6,5 +6,11 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Ver lo que bajó') {
+            steps {
+                sh 'ls -la'
+                sh 'git log --oneline -3'
+            }
+        }
     }
 }
