@@ -1,16 +1,17 @@
 pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
+    agent {
+        docker {
+            image 'mcr.microsoft.com/playwright:v1.63.0-noble'
+            args '--ipc=host -u pwuser'
+            reuseNode true
         }
-        stage('Ver lo que bajó') {
-            steps {
-                sh 'ls -la'
-                sh 'git log --oneline -3'
-            }
+    }
+    stages {
+        stage('Instalar dependencias') {
+            steps { sh 'npm ci' }
+        }
+        stage('Tests') {
+            steps { sh 'npx playwright test --project=Computadora' }
         }
     }
 }
