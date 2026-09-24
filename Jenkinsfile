@@ -1,11 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'mcr.microsoft.com/playwright:v1.63.0-noble'
-            args '--ipc=host -u pwuser'
-            reuseNode true
-        }
+ agent {
+    docker {
+        image 'mcr.microsoft.com/playwright:v1.63.0-noble'
+        args '--ipc=host'          // antes: '--ipc=host -u pwuser'
+        reuseNode true
     }
+}
     stages {
         stage('Instalar dependencias') {
             steps { sh 'npm ci' }
