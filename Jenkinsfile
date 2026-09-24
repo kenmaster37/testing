@@ -14,4 +14,19 @@ pipeline {
             steps { sh 'npx playwright test --project=Computadora' }
         }
     }
+
+  post {
+    always {
+        junit 'results.xml'
+        archiveArtifacts 'playwright-report/**, test-results/**'
+        publishHTML(target: [
+            allowMissing: true,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'playwright-report',
+            reportFiles: 'index.html',
+            reportName: 'Playwright Report'
+        ])
+    }
+}
 }
