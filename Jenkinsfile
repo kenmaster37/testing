@@ -7,9 +7,9 @@ pipeline {
         }
     }
 
-    triggers {
-        cron('*/30 * * * *')
-    }
+    // triggers {
+    //     cron('*/30 * * * *')
+    // }
 
     options {
         disableConcurrentBuilds()
